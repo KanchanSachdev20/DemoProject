@@ -19,7 +19,7 @@
 		<parameter name="browser" value="chrome" />
 
 		<classes>
-			<class name="com.qa.opencart.tests.LoginPageTes" />
+			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
 	</test>
 
