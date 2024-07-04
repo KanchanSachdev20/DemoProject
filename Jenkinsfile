@@ -28,7 +28,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/KanchanSachdev20/DemoProject.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=dev"
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=dev"
                     
                 }
             }
@@ -48,7 +48,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/KanchanSachdev20/DemoProject.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_regression.xml -Denv=qa"
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_regression.xml -Denv=qa"
                     
                 }
             }
@@ -81,7 +81,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/KanchanSachdev20/DemoProject.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=stage"
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=stage"
                     
                 }
             }
