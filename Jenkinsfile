@@ -3,7 +3,7 @@ pipeline
     agent any
     
     tools{
-        Maven 'Maven'
+        maven 'Maven'
         }
 
     stages 
@@ -28,7 +28,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/KanchanSachdev20/DemoProject.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=dev"
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=dev"
                     
                 }
             }
@@ -47,8 +47,8 @@ pipeline
         stage('Regression Automation Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/naveenanimation20/Dec2023POMSeries.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_regression.xml -Denv=qa"
+                    git 'https://github.com/KanchanSachdev20/DemoProject.git'
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_regression.xml -Denv=qa"
                     
                 }
             }
@@ -70,17 +70,6 @@ pipeline
         }
         
         
-        stage('Publish Extent Report'){
-            steps{
-                     publishHTML([allowMissing: false,
-                                  alwaysLinkToLastBuild: false, 
-                                  keepAll: true, 
-                                  reportDir: 'reports', 
-                                  reportFiles: 'TestExecutionReport.html', 
-                                  reportName: 'HTML Regression Extent Report', 
-                                  reportTitles: ''])
-            }
-        }
         
         stage("Deploy to Stage"){
             steps{
@@ -91,8 +80,8 @@ pipeline
         stage('Sanity Automation Test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/naveenanimation20/Dec2023POMSeries.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=stage"
+                    git 'https://github.com/KanchanSachdev20/DemoProject.git'
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/main/resources/runners/testng_sanity.xml -Denv=stage"
                     
                 }
             }
@@ -100,17 +89,6 @@ pipeline
         
         
         
-        stage('Publish sanity Extent Report'){
-            steps{
-                     publishHTML([allowMissing: false,
-                                  alwaysLinkToLastBuild: false, 
-                                  keepAll: true, 
-                                  reportDir: 'reports', 
-                                  reportFiles: 'TestExecutionReport.html', 
-                                  reportName: 'HTML Sanity Extent Report', 
-                                  reportTitles: ''])
-            }
-        }
         
         
     }
